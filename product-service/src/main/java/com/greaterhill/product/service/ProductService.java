@@ -1,6 +1,6 @@
 package com.greaterhill.product.service;
 
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import com.greaterhill.product.model.CreateProductDto;
 import org.springframework.stereotype.Service;
 

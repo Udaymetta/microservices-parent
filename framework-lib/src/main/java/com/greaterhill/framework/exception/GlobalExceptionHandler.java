@@ -1,6 +1,6 @@
-package com.greaterhill.exception;
+package com.greaterhill.framework.exception;
 
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

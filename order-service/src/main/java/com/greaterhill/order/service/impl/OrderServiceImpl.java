@@ -1,10 +1,11 @@
 package com.greaterhill.order.service.impl;
 
-import com.greaterhill.exception.InternalException;
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.exception.InternalException;
+import com.greaterhill.framework.model.CommonResponseObject;
 import com.greaterhill.order.dao.OrderHeaderDao;
 import com.greaterhill.order.entity.OrderDetail;
 import com.greaterhill.order.entity.OrderHeader;
+import com.greaterhill.order.feign.InventoryInterface;
 import com.greaterhill.order.model.InventoryStockResponse;
 import com.greaterhill.order.model.OrderLineItemsDto;
 import com.greaterhill.order.model.OrderRequestDto;
@@ -31,8 +32,9 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderHeaderDao orderHeaderDao;
     private final RestTemplate restTemplate;
-    @Value("${app.secretkey}")
-    private final String secretKey;
+    private final InventoryInterface inventoryInterface;
+//    @Value("${app.secretkey}")
+//    private String secretKey;
 
     @Override
     public CommonResponseObject createOrder(OrderRequestDto request) {
@@ -85,13 +87,13 @@ public class OrderServiceImpl implements OrderService {
     private Boolean getIsItemInStock(List<OrderLineItemsDto> lineItems) {
         List<Integer> itemIdList = lineItems.stream().map(OrderLineItemsDto::getId).toList();
         ResponseEntity<List<InventoryStockResponse>> response;
-        String url = "http://inventory-service/api/inventory";
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url);
-        itemIdList.forEach(itemId -> uriBuilder.queryParam("itemIdList", itemId));
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.AUTHORIZATION, secretKey);
-        response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, new HttpEntity<>(headers), new ParameterizedTypeReference<List<InventoryStockResponse>>() {
-        });
+//        String url = "http://inventory-service/api/inventory";
+//        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url);
+//        itemIdList.forEach(itemId -> uriBuilder.queryParam("itemIdList", itemId));
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set(HttpHeaders.AUTHORIZATION, secretKey);
+//        response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, new HttpEntity<>(headers), new ParameterizedTypeReference<List<InventoryStockResponse>>() {});
+        response = inventoryInterface.getIsInStock(itemIdList);
         if (response.getBody() != null && !response.getBody().isEmpty()) {
             if (response.getBody().stream().allMatch(InventoryStockResponse::getInStock)) {
                 if (lineItems.stream().allMatch(line -> response.getBody().stream().allMatch(res -> res.getId().equals(line.getId()) && res.getQuantity() >= line.getQuantity()))) {

@@ -1,6 +1,6 @@
 package com.greaterhill.order.service;
 
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import com.greaterhill.order.model.OrderRequestDto;
 import org.springframework.stereotype.Service;
 

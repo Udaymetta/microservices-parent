@@ -1,15 +1,13 @@
-package com.greaterhill.config;
+package com.greaterhill.framework.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -24,6 +22,10 @@ public class Authorizer extends OncePerRequestFilter {
     @Value("${app.secretkey}")
     private String SECRET_KEY;
 
+    private static boolean ignoreUri(String uri){
+        return uri.contains("/actuator") || uri.contains("/health");
+    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -34,7 +36,7 @@ public class Authorizer extends OncePerRequestFilter {
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 token = authorizationHeader.substring(7);
             }
-            if(SECRET_KEY.equals(token)) {
+            if(ignoreUri(request.getRequestURI()) || SECRET_KEY.equals(token)) {
                 filterChain.doFilter(request, response);
             }
             else {

@@ -1,4 +1,4 @@
-package com.greaterhill.exception;
+package com.greaterhill.framework.exception;
 
 import java.io.Serial;
 

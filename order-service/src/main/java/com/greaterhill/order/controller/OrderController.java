@@ -1,6 +1,6 @@
 package com.greaterhill.order.controller;
 
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import com.greaterhill.order.model.OrderRequestDto;
 import com.greaterhill.order.service.OrderService;
 import lombok.RequiredArgsConstructor;

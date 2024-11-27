@@ -1,6 +1,6 @@
 package com.greaterhill.product.controller;
 
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import com.greaterhill.product.model.CreateProductDto;
 import com.greaterhill.product.service.ProductService;
 import lombok.RequiredArgsConstructor;

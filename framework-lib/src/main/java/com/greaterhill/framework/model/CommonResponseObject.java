@@ -1,4 +1,4 @@
-package com.greaterhill.model;
+package com.greaterhill.framework.model;
 
 import lombok.Builder;
 import lombok.Data;

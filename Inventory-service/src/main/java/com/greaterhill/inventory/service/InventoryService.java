@@ -2,7 +2,7 @@ package com.greaterhill.inventory.service;
 
 import com.greaterhill.inventory.model.InventoryRequestDto;
 import com.greaterhill.inventory.model.InventoryStockResponse;
-import com.greaterhill.model.CommonResponseObject;
+import com.greaterhill.framework.model.CommonResponseObject;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -11,6 +11,9 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+  cloud:
+    compatibility-verifier:
+      enabled: false
 eureka:
   client:
     service-url:
@@ -19,3 +22,24 @@ server:
   port: 0
 app:
   secretkey: "edfgtyhbvf234fdr67yh"
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+logging:
+  level:
+    org:
+      springframework:
+        beans:
+          factory: INFO
