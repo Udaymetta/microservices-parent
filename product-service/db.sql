@@ -1,0 +1,10 @@
+CREATE DATABASE product;
+
+CREATE TABLE item (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(45) NOT NULL,
+  type varchar(45) NOT NULL,
+  modifiedtimestamp timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id,name,type)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
