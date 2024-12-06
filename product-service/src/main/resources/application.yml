@@ -37,6 +37,14 @@ management:
     enabled: true
     sampling:
       probability: 1.0
+  prometheus:
+    metrics:
+      export:
+        properties:
+          io:
+            prometheus:
+              exporter:
+                exemplarsOnAllMetricTypes: false
 logging:
   level:
     org:

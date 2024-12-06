@@ -11,12 +11,20 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    template:
+      default-topic: gh.ord.notify
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 server:
-  port: 8080
+  port: 0
 app:
   secretkey: "edfgtyhbvf234fdr67yh"
 management:
@@ -33,6 +41,14 @@ management:
   tracing:
     sampling:
       probability: 1.0
+  prometheus:
+    metrics:
+      export:
+        properties:
+          io:
+            prometheus:
+              exporter:
+                exemplarsOnAllMetricTypes: false
 logging:
   level:
     root: INFO

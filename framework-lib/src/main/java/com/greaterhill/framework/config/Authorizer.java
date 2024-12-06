@@ -23,7 +23,9 @@ public class Authorizer extends OncePerRequestFilter {
     private String SECRET_KEY;
 
     private static boolean ignoreUri(String uri){
-        return uri.contains("/actuator") || uri.contains("/health");
+        return uri.contains("/actuator") || uri.contains("/health")
+                || uri.contains("/v3/api-docs")
+                || uri.contains("/swagger-ui");
     }
 
 

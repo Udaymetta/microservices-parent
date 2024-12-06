@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.6:3306/order
+    username: root
+    password: root
+  kafka:
+    bootstrap-servers:
+      - broker:29092
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+server:
+  port: 8080

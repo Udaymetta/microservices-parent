@@ -15,11 +15,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>product-service</module>
-        <module>Inventory-service</module>
+        <module>inventory-service</module>
         <module>order-service</module>
         <module>service-registry</module>
         <module>api-gateway</module>
         <module>framework-lib</module>
+        <module>notification-service</module>
     </modules>
 
     <properties>
@@ -55,4 +56,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

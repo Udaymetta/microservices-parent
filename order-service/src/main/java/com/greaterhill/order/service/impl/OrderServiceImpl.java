@@ -12,15 +12,10 @@ import com.greaterhill.order.model.OrderRequestDto;
 import com.greaterhill.order.model.OrderResponseDto;
 import com.greaterhill.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -33,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderHeaderDao orderHeaderDao;
     private final RestTemplate restTemplate;
     private final InventoryInterface inventoryInterface;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 //    @Value("${app.secretkey}")
 //    private String secretKey;
 
@@ -54,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
         }).toList());
         if (Boolean.TRUE.equals(getIsItemInStock(request.getLineItems()))) {
             orderHeaderDao.save(orderHeader);
+            kafkaTemplate.send("gh.ord.notify", "Order : " + orderHeader.getOrderNumber() + " is placed successfully");
             return CommonResponseObject.builder()
                     .status("ok")
                     .message("OrderNumber : " + orderHeader.getOrderNumber())

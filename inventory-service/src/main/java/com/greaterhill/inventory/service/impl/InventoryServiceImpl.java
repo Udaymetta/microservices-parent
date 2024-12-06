@@ -1,15 +1,14 @@
 package com.greaterhill.inventory.service.impl;
 
 import com.greaterhill.framework.exception.InternalException;
+import com.greaterhill.framework.model.CommonResponseObject;
 import com.greaterhill.inventory.dao.StoreItemsDao;
 import com.greaterhill.inventory.entity.StoreItems;
 import com.greaterhill.inventory.feign.ProductInterface;
 import com.greaterhill.inventory.model.InventoryRequestDto;
 import com.greaterhill.inventory.model.InventoryStockResponse;
 import com.greaterhill.inventory.service.InventoryService;
-import com.greaterhill.framework.model.CommonResponseObject;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
