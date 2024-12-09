@@ -31,7 +31,7 @@ public class OpenAPIConfig {
     @Bean
     public OpenAPI myOpenAPI() {
         Server localServer = new Server();
-        String port = environment.getProperty("local.server.port") == null ? environment.getProperty("server.port") : "8080";
+        String port = environment.getProperty("local.server.port") != null ? environment.getProperty("local.server.port") : environment.getProperty("server.port");
         localServer.setUrl("http://localhost:" + port);
         localServer.setDescription("Server URL in Local environment");
 
