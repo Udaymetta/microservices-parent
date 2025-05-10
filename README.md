@@ -29,7 +29,9 @@ Docker & Docker Compose
 Prometheus & Grafana for monitoring
 
 🛠️ Getting Started
+
 Prerequisites
+
 Java 17
 
 Maven
